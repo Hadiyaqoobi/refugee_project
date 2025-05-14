@@ -1,21 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-import json
 import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
-from db import init_db, save_user  # <-- SQLite DB functions
+from db import init_db, save_user
+from personalized_scraper import run_scraper_for_user  # <-- added import
 
-# Load .env for local dev
+# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-
-# Initialize the SQLite database
-init_db()
+init_db()  # Ensure the users.db table exists
 
 # Send confirmation email
 def send_email(to_email, subject, body):
+    print("📨 Preparing to send confirmation email...")
+
     from_email = os.getenv("EMAIL_ADDRESS")
     password = os.getenv("EMAIL_PASSWORD")
 
@@ -28,7 +28,7 @@ def send_email(to_email, subject, body):
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
             smtp.login(from_email, password)
             smtp.send_message(msg)
-            print(f"✅ Email sent to {to_email}")
+            print(f"✅ Confirmation email sent to {to_email}")
     except Exception as e:
         print(f"❌ Email error: {e}")
 
@@ -51,11 +51,11 @@ def register():
                 "frequency": request.form["frequency"].lower()
             }
 
-            # Save to SQLite instead of Firebase
             save_user(user)
+            print("💾 User saved to SQLite")
 
             # Send confirmation email
-            body = f"""Hello {user['first_name']},
+            confirmation_body = f"""Hello {user['first_name']},
 
 Thank you for registering for refugee opportunity updates.
 
@@ -66,7 +66,10 @@ Frequency: {user['frequency'].capitalize()}
 Best,
 Refugee Opportunities Team
 """
-            send_email(user["email"], "Your Refugee Opportunity Subscription", body)
+            send_email(user["email"], "Your Refugee Opportunity Subscription", confirmation_body)
+
+            # Trigger personalized scraper and send opportunity email
+            run_scraper_for_user(user)
 
             return redirect(url_for("thank_you"))
 
