@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register for Refugee Opportunity Updates</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Refugee Opportunity Registration Form</h2>
+
+    <form method="POST">
+        <label>First Name:</label><br>
+        <input type="text" name="first_name" required><br><br>
+
+        <label>Last Name:</label><br>
+        <input type="text" name="last_name" required><br><br>
+
+        <label>Email Address:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Country:</label><br>
+        <input type="text" name="country" required><br><br>
+
+        <label>Phone Number:</label><br>
+        <input type="text" name="phone"><br><br>
+
+        <label>Address:</label><br>
+        <input type="text" name="address"><br><br>
+
+        <label>What kinds of opportunities are you looking for?</label><br>
+        <small>Separate with commas (e.g., scholarships, jobs, online courses)</small><br>
+        <input type="text" name="preferences" required><br><br>
+
+        <label>How often would you like to receive updates?</label><br>
+        <select name="frequency" required>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+        </select><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
