@@ -1,71 +1,100 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hope Finder – Refugee Opportunities</title>
+  <title>Hope Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
+    * {
       margin: 0;
-      background: #f9f9f9;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
       color: #333;
     }
-    header {
-      background-image: url('https://images.unsplash.com/photo-1604477268330-1ec1612d1738?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1554774853-bb03b1f2cb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       color: white;
-      padding: 6em 2em;
       text-align: center;
+      padding: 20px;
     }
-    header h1 {
+
+    .hero h1 {
       font-size: 3em;
-      margin: 0;
+      margin-bottom: 15px;
     }
-    header p {
+
+    .hero p {
       font-size: 1.3em;
-      margin-top: 0.5em;
+      max-width: 600px;
     }
+
     .content {
       max-width: 800px;
-      margin: 2em auto;
-      padding: 1em;
+      margin: 60px auto;
+      padding: 0 30px;
     }
-    .story, .how-it-works {
-      margin-bottom: 2em;
+
+    .section-title {
+      color: #0077ff;
+      font-weight: 700;
+      font-size: 1.6em;
+      margin-bottom: 15px;
     }
-    h2 {
-      color: #007BFF;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 3em;
-    }
-    .cta a {
-      background: #007BFF;
-      color: white;
-      padding: 1em 2em;
-      text-decoration: none;
-      border-radius: 8px;
+
+    .content p {
       font-size: 1.1em;
+      line-height: 1.7;
+      margin-bottom: 20px;
     }
-    .cta a:hover {
-      background: #0056b3;
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0077ff;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #005fcc;
+    }
+
+    .center-btn {
+      text-align: center;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-
-  <header>
+  <div class="hero">
     <h1>Hope Finder</h1>
-    <p>Find scholarships, jobs, and education opportunities – without missing deadlines</p>
-  </header>
+    <p>Find scholarships, jobs, and education opportunities — without missing deadlines</p>
+  </div>
 
   <div class="content">
-    <section class="story">
-      <h2>Why I Built This</h2>
+    <div class="section">
+      <h2 class="section-title">Why I Built This</h2>
       <p>
         My name is Hadi, and I spent most of my life living as a refugee. While in Turkey, I used to check Google multiple times a day, desperately looking for new opportunities — from online courses to scholarships to jobs.
       </p>
@@ -75,21 +104,20 @@
       <p>
         So I built this website — to search for refugee-related opportunities for you, and send you a personalized email when new ones appear. You don’t have to miss your chance.
       </p>
-    </section>
+    </div>
 
-    <section class="how-it-works">
-      <h2>How It Works</h2>
+    <div class="section">
+      <h2 class="section-title">How It Works</h2>
       <ul>
         <li>Register with your email and interests (scholarships, jobs, online courses, etc.)</li>
-        <li>The tool checks trusted websites daily for new opportunities</li>
+        <li>The tool checks trusted websites and search engines daily for new opportunities</li>
         <li>You get an email as soon as something relevant is found</li>
       </ul>
-    </section>
+    </div>
 
-    <div class="cta">
-      <a href="{{ url_for('register') }}">Get Started</a>
+    <div class="center-btn">
+      <a href="/register" class="btn">Get Started</a>
     </div>
   </div>
-
 </body>
 </html>
