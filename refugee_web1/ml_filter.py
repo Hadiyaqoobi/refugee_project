@@ -2,7 +2,7 @@ import joblib
 import os
 
 # Load model and vectorizer once
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "ml_model.joblib")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "ml_model.joblib")
 model_bundle = joblib.load(MODEL_PATH)
 vectorizer = model_bundle["vectorizer"]
 model = model_bundle["model"]
