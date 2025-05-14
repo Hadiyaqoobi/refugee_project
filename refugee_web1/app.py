@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 from db import init_db, save_user
-from personalized_scraper import run_scraper_for_user  # <-- added import
+from personalized_scraper import run_scraper_for_user
 
 # Load environment variables
 load_dotenv()
@@ -47,7 +47,7 @@ def register():
                 "country": request.form["country"],
                 "phone": request.form["phone"],
                 "address": request.form["address"],
-                "preferences": [x.strip().lower() for x in request.form["preferences"].split(",")],
+                "preferences": request.form.getlist("preferences"),  # ✅ updated for checkboxes
                 "frequency": request.form["frequency"].lower()
             }
 
