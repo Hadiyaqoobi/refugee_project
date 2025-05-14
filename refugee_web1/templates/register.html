@@ -1,89 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Refugee Opportunity Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f7f8;
-            padding: 2em;
-        }
-        form {
-            background: white;
-            padding: 2em;
-            max-width: 500px;
-            margin: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        label {
-            font-weight: bold;
-            margin-top: 1em;
-            display: block;
-        }
-        input, select {
-            width: 100%;
-            padding: 0.5em;
-            margin-top: 0.3em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .checkbox-group {
-            margin-top: 0.5em;
-        }
-        .checkbox-group label {
-            font-weight: normal;
-            display: block;
-            margin-bottom: 0.3em;
-        }
-        button {
-            margin-top: 1.5em;
-            padding: 0.7em 1.2em;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Register for Refugee Opportunities</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f6f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #e53958;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input[type="text"], input[type="email"], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .checkbox-group {
+      margin-bottom: 20px;
+    }
+    .checkbox-group label {
+      display: block;
+      font-weight: normal;
+      margin-left: 5px;
+    }
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+    button {
+      width: 100%;
+      background: #e53958;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #d22b47;
+    }
+  </style>
 </head>
 <body>
-    <form action="/register" method="post">
-        <h2>Register for Refugee Opportunities</h2>
+  <div class="container">
+    <h2>Register for Refugee Opportunities</h2>
+    <form action="/register" method="POST">
+      <label>First Name:</label>
+      <input type="text" name="first_name" required>
 
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" required>
+      <label>Last Name:</label>
+      <input type="text" name="last_name" required>
 
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" required>
+      <label>Email:</label>
+      <input type="email" name="email" required>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
+      <label>Country:</label>
+      <input type="text" name="country" required>
 
-        <label for="country">Country:</label>
-        <input type="text" name="country" required>
+      <label>Phone:</label>
+      <input type="text" name="phone">
 
-        <label for="phone">Phone:</label>
-        <input type="tel" name="phone">
+      <label>Address:</label>
+      <input type="text" name="address" required>
 
-        <label for="address">Address:</label>
-        <input type="text" name="address">
+      <label>What types of opportunities are you interested in?</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="preferences" value="jobs"> Jobs</label>
+        <label><input type="checkbox" name="preferences" value="scholarships"> Scholarships</label>
+        <label><input type="checkbox" name="preferences" value="online courses"> Online Courses</label>
+        <label><input type="checkbox" name="preferences" value="training"> Training</label>
+        <label><input type="checkbox" name="preferences" value="mentorship"> Mentorship</label>
+      </div>
 
-        <label>What types of opportunities are you interested in?</label>
-        <div class="checkbox-group">
-            <label><input type="checkbox" name="preferences" value="jobs"> Jobs</label>
-            <label><input type="checkbox" name="preferences" value="scholarships"> Scholarships</label>
-            <label><input type="checkbox" name="preferences" value="online courses"> Online Courses</label>
-            <label><input type="checkbox" name="preferences" value="internships"> Internships</label>
-            <label><input type="checkbox" name="preferences" value="training"> Training</label>
-        </div>
+      <label>How often do you want to receive updates?</label>
+      <select name="frequency" required>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
 
-        <label for="frequency">How often would you like updates?</label>
-        <select name="frequency" required>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-        </select>
-
-        <button type="submit">Submit</button>
+      <button type="submit">Register</button>
     </form>
+  </div>
 </body>
 </html>
