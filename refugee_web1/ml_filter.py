@@ -38,8 +38,4 @@ def is_relevant(text):
     return prediction == "relevant"
 
 # For testing or training manually
-if __name__ == "__main__":
-    csv_path = csv_path = "refugee_web1/refugee_opportunity_dataset_1000plus.csv" # Update path as needed
-    train_model(csv_path)
-    print(is_relevant("Scholarship opportunity for Afghan refugees"))
-    print(is_relevant("Read more about our privacy policy"))
+
