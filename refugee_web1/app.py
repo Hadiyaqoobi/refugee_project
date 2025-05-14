@@ -4,25 +4,15 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
-import firebase_admin
-from firebase_admin import credentials, db
+from db import init_db, save_user  # <-- SQLite DB functions
 
 # Load .env for local dev
 load_dotenv()
 
 app = Flask(__name__)
 
-# Choose correct path for Firebase key
-firebase_key_path = "firebase_key.json"
-if os.environ.get("RENDER"):
-    firebase_key_path = "/etc/secrets/firebase_key.json"
-
-# Initialize Firebase only once
-if not firebase_admin._apps:
-    cred = credentials.Certificate(firebase_key_path)
-    firebase_admin.initialize_app(cred, {
-        "databaseURL": "https://refugee-4506b-default-rtdb.firebaseio.com"
-    })
+# Initialize the SQLite database
+init_db()
 
 # Send confirmation email
 def send_email(to_email, subject, body):
@@ -61,9 +51,8 @@ def register():
                 "frequency": request.form["frequency"].lower()
             }
 
-            # Save user to Firebase
-            ref = db.reference("users")
-            ref.push(user)
+            # Save to SQLite instead of Firebase
+            save_user(user)
 
             # Send confirmation email
             body = f"""Hello {user['first_name']},
