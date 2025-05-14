@@ -4,7 +4,6 @@ from email.mime.text import MIMEText
 import smtplib
 import os
 from dotenv import load_dotenv
-from ml_filter import is_relevant
 
 load_dotenv()
 
@@ -20,17 +19,14 @@ WEBSITES = [
     "https://www.refugeeemployment.org/",
 ]
 
-KEYWORD_FALLBACKS = [
-    "refugee", "asylum", "apply", "application",
-    "job", "employment", "training", "course",
-    "education", "scholarship", "mentorship", "program"
+KEYWORDS = [
+    "refugee", "asylum", "job", "employment", "work", "training", "course",
+    "education", "scholarship", "mentorship", "apply", "application",
+    "career", "certification", "bootcamp", "internship"
 ]
 
-def is_relevant_or_keyword(text):
-    if is_relevant(text):
-        return True
-    text_lower = text.lower()
-    return any(word in text_lower for word in KEYWORD_FALLBACKS)
+def is_keyword_match(text):
+    return any(keyword in text.lower() for keyword in KEYWORDS)
 
 def scrape_website(url):
     try:
@@ -44,8 +40,7 @@ def scrape_website(url):
             href = link.get("href")
             if href and text:
                 full_link = href if href.startswith("http") else url.rstrip("/") + "/" + href.lstrip("/")
-                combined = f"{text} {full_link}"
-                if is_relevant_or_keyword(combined):
+                if is_keyword_match(text) or is_keyword_match(full_link):
                     results.append((text, full_link))
         return results
     except Exception as e:
@@ -63,8 +58,7 @@ def scrape_duckduckgo(query):
         for link in links[:10]:
             title = link.get_text(strip=True)
             href = link.get("href")
-            combined = f"{title} {href}"
-            if is_relevant_or_keyword(combined):
+            if is_keyword_match(title + " " + href):
                 results.append((title, href))
     except Exception as e:
         print(f"❌ DuckDuckGo error: {e}")
@@ -81,8 +75,7 @@ def scrape_bing(query):
         for link in links[:10]:
             title = link.get_text(strip=True)
             href = link.get("href")
-            combined = f"{title} {href}"
-            if is_relevant_or_keyword(combined):
+            if is_keyword_match(title + " " + href):
                 results.append((title, href))
     except Exception as e:
         print(f"❌ Bing error: {e}")
@@ -121,33 +114,31 @@ def send_email(to_email, subject, body):
         print(f"❌ Email error: {e}")
 
 def run_scraper_for_user(user):
-    print(f"🚀 Running direct scraper for {user['first_name']} ({user['email']})")
+    print(f"🚀 Running scraper for {user['first_name']} ({user['email']})")
     categorized_results = {}
 
-    # Existing websites
     for site in WEBSITES:
         results = scrape_website(site)
         if results:
             categorized_results[site] = results
 
-    # Search engines based on preferences
     for pref in user.get("preferences", []):
-        q = f"refugee {pref} 2025"
-        ddg_results = scrape_duckduckgo(q)
-        bing_results = scrape_bing(q)
+        query = f"refugee {pref} 2025"
+        ddg_results = scrape_duckduckgo(query)
+        bing_results = scrape_bing(query)
         if ddg_results:
-            categorized_results[f"DuckDuckGo: {q}"] = ddg_results
+            categorized_results[f"DuckDuckGo: {query}"] = ddg_results
         if bing_results:
-            categorized_results[f"Bing: {q}"] = bing_results
+            categorized_results[f"Bing: {query}"] = bing_results
 
     body = format_email(user["first_name"], categorized_results)
     send_email(user["email"], "Your Refugee Opportunity Updates", body)
 
-# For manual testing
+# Optional test
 if __name__ == "__main__":
     test_user = {
         "first_name": "Niloofar",
         "email": "your@email.com",
-        "preferences": ["scholarships", "jobs", "online courses"]
+        "preferences": ["scholarship", "job", "online course"]
     }
     run_scraper_for_user(test_user)
