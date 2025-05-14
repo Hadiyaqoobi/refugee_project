@@ -32,10 +32,12 @@ def send_email(to_email, subject, body):
     except Exception as e:
         print(f"❌ Email error: {e}")
 
+# Show homepage (story + CTA)
 @app.route("/")
 def home():
-    return redirect(url_for("register"))
+    return render_template("index.html")
 
+# Registration form
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -47,7 +49,7 @@ def register():
                 "country": request.form["country"],
                 "phone": request.form["phone"],
                 "address": request.form["address"],
-                "preferences": request.form.getlist("preferences"),  # ✅ updated for checkboxes
+                "preferences": request.form.getlist("preferences"),  # from checkboxes
                 "frequency": request.form["frequency"].lower()
             }
 
@@ -68,7 +70,7 @@ Refugee Opportunities Team
 """
             send_email(user["email"], "Your Refugee Opportunity Subscription", confirmation_body)
 
-            # Trigger personalized scraper and send opportunity email
+            # Run personalized scraper + email results
             run_scraper_for_user(user)
 
             return redirect(url_for("thank_you"))
@@ -79,6 +81,7 @@ Refugee Opportunities Team
 
     return render_template("register.html")
 
+# Thank you page
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
