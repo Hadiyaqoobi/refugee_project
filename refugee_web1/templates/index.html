@@ -1,1 +1,95 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hope Finder – Refugee Opportunities</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-image: url('https://images.unsplash.com/photo-1604477268330-1ec1612d1738?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 6em 2em;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.3em;
+      margin-top: 0.5em;
+    }
+    .content {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 1em;
+    }
+    .story, .how-it-works {
+      margin-bottom: 2em;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    .cta {
+      text-align: center;
+      margin-top: 3em;
+    }
+    .cta a {
+      background: #007BFF;
+      color: white;
+      padding: 1em 2em;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+    }
+    .cta a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hope Finder</h1>
+    <p>Find scholarships, jobs, and education opportunities – without missing deadlines</p>
+  </header>
+
+  <div class="content">
+    <section class="story">
+      <h2>Why I Built This</h2>
+      <p>
+        My name is Hadi, and I spent most of my life living as a refugee. While in Turkey, I used to check Google multiple times a day, desperately looking for new opportunities — from online courses to scholarships to jobs.
+      </p>
+      <p>
+        Eventually, I grew tired of searching and stopped for a while. One day, I discovered I had missed a scholarship deadline that could have changed my life. I don’t want that to happen to anyone else.
+      </p>
+      <p>
+        So I built this website — to search for refugee-related opportunities for you, and send you a personalized email when new ones appear. You don’t have to miss your chance.
+      </p>
+    </section>
+
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <ul>
+        <li>Register with your email and interests (scholarships, jobs, online courses, etc.)</li>
+        <li>The tool checks trusted websites daily for new opportunities</li>
+        <li>You get an email as soon as something relevant is found</li>
+      </ul>
+    </section>
+
+    <div class="cta">
+      <a href="{{ url_for('register') }}">Get Started</a>
+    </div>
+  </div>
+
+</body>
+</html>
