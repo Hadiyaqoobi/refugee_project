@@ -1,99 +1,62 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Hope Finder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f9f9f9;
-      color: #333;
     }
-
     .hero {
-      background: url('https://images.unsplash.com/photo-1554774853-bb03b1f2cb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      background: url('https://images.unsplash.com/photo-1554774853-bb03b1f2cb55?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
       height: 70vh;
+      color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: white;
       text-align: center;
-      padding: 20px;
+      padding: 2rem;
     }
-
     .hero h1 {
-      font-size: 3em;
-      margin-bottom: 15px;
+      font-size: 3rem;
+      font-weight: bold;
     }
-
     .hero p {
-      font-size: 1.3em;
-      max-width: 600px;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin-top: 1rem;
     }
-
-    .content {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 30px;
-    }
-
     .section-title {
       color: #0077ff;
       font-weight: 700;
-      font-size: 1.6em;
-      margin-bottom: 15px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-
-    .content p {
-      font-size: 1.1em;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    ul {
-      margin-left: 20px;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-block;
+    .btn-custom {
       background-color: #0077ff;
       color: white;
-      padding: 14px 28px;
       border: none;
-      border-radius: 6px;
-      font-size: 1.1em;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
     }
-
-    .btn:hover {
+    .btn-custom:hover {
       background-color: #005fcc;
-    }
-
-    .center-btn {
-      text-align: center;
-      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div class="hero">
+  <header class="hero">
     <h1>Hope Finder</h1>
     <p>Find scholarships, jobs, and education opportunities — without missing deadlines</p>
-  </div>
+    <a href="/register" class="btn btn-lg btn-custom mt-4">Get Started</a>
+  </header>
 
-  <div class="content">
-    <div class="section">
+  <main class="container py-5">
+    <section class="mb-5">
       <h2 class="section-title">Why I Built This</h2>
       <p>
         My name is Hadi, and I spent most of my life living as a refugee. While in Turkey, I used to check Google multiple times a day, desperately looking for new opportunities — from online courses to scholarships to jobs.
@@ -104,20 +67,18 @@
       <p>
         So I built this website — to search for refugee-related opportunities for you, and send you a personalized email when new ones appear. You don’t have to miss your chance.
       </p>
-    </div>
+    </section>
 
-    <div class="section">
+    <section>
       <h2 class="section-title">How It Works</h2>
       <ul>
         <li>Register with your email and interests (scholarships, jobs, online courses, etc.)</li>
         <li>The tool checks trusted websites and search engines daily for new opportunities</li>
         <li>You get an email as soon as something relevant is found</li>
       </ul>
-    </div>
+    </section>
+  </main>
 
-    <div class="center-btn">
-      <a href="/register" class="btn">Get Started</a>
-    </div>
-  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
